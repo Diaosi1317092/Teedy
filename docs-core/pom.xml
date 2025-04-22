@@ -14,6 +14,17 @@
   <packaging>jar</packaging>
   <name>Docs Core</name>
 
+  <reporting>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.12.1</version>
+        </plugin>
+    </plugins>
+    <outputDirectory>${project.parent.basedir}/target/site/${project.artifactId}</outputDirectory>
+  </reporting>
+
   <dependencies>
     <!-- Persistence layer dependencies -->
     <dependency>
