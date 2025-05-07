@@ -21,14 +21,14 @@ import com.sismics.util.EnvironmentUtil;
      * @return Base data directory
      */
     public static Path getBaseDataDirectory() {
-<span class="fc" id="L24">        Path baseDataDir = null;</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (StringUtils.isNotBlank(EnvironmentUtil.getTeedyHome())) {</span>
+<span class="nc" id="L24">        Path baseDataDir = null;</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        if (StringUtils.isNotBlank(EnvironmentUtil.getTeedyHome())) {</span>
             // If the docs.home property is set then use it
 <span class="nc" id="L27">            baseDataDir = Paths.get(EnvironmentUtil.getTeedyHome());</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        } else if (EnvironmentUtil.isUnitTest()) {</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        } else if (EnvironmentUtil.isUnitTest()) {</span>
             // For unit testing, use a temporary directory
-<span class="fc" id="L30">            baseDataDir = Paths.get(System.getProperty(&quot;java.io.tmpdir&quot;));</span>
-<span class="fc" id="L31">        } else {</span>
+<span class="nc" id="L30">            baseDataDir = Paths.get(System.getProperty(&quot;java.io.tmpdir&quot;));</span>
+        } else {
             // We are in a webapp environment and nothing is specified, use the default directory for this OS
 <span class="nc bnc" id="L33" title="All 2 branches missed.">            if (EnvironmentUtil.isUnix()) {</span>
 <span class="nc" id="L34">                baseDataDir = Paths.get(&quot;/var/docs&quot;);</span>
@@ -39,15 +39,15 @@ import com.sismics.util.EnvironmentUtil;
             }
         }
 
-<span class="pc bpc" id="L42" title="2 of 4 branches missed.">        if (baseDataDir != null &amp;&amp; !Files.isDirectory(baseDataDir)) {</span>
+<span class="nc bnc" id="L42" title="All 4 branches missed.">        if (baseDataDir != null &amp;&amp; !Files.isDirectory(baseDataDir)) {</span>
             try {
 <span class="nc" id="L44">                Files.createDirectories(baseDataDir);</span>
 <span class="nc" id="L45">            } catch (IOException e) {</span>
 <span class="nc" id="L46">                throw new RuntimeException(e);</span>
-            }
+<span class="nc" id="L47">            }</span>
         }
 
-<span class="fc" id="L50">        return baseDataDir;</span>
+<span class="nc" id="L50">        return baseDataDir;</span>
     }
     
     /**
@@ -74,7 +74,7 @@ import com.sismics.util.EnvironmentUtil;
      * @return Storage directory.
      */
     public static Path getStorageDirectory() {
-<span class="fc" id="L77">        return getDataSubDirectory(&quot;storage&quot;);</span>
+<span class="nc" id="L77">        return getDataSubDirectory(&quot;storage&quot;);</span>
     }
     
     /**
@@ -101,16 +101,16 @@ import com.sismics.util.EnvironmentUtil;
      * @return Subdirectory
      */
     private static Path getDataSubDirectory(String subdirectory) {
-<span class="fc" id="L104">        Path baseDataDir = getBaseDataDirectory();</span>
-<span class="fc" id="L105">        Path directory = baseDataDir.resolve(subdirectory);</span>
-<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!Files.isDirectory(directory)) {</span>
+<span class="nc" id="L104">        Path baseDataDir = getBaseDataDirectory();</span>
+<span class="nc" id="L105">        Path directory = baseDataDir.resolve(subdirectory);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (!Files.isDirectory(directory)) {</span>
             try {
-<span class="fc" id="L108">                Files.createDirectories(directory);</span>
-<span class="pc" id="L109">            } catch (IOException e) {</span>
+<span class="nc" id="L108">                Files.createDirectories(directory);</span>
+<span class="nc" id="L109">            } catch (IOException e) {</span>
 <span class="nc" id="L110">                throw new RuntimeException(e);</span>
-            }
+<span class="nc" id="L111">            }</span>
         }
-<span class="fc" id="L113">        return directory;</span>
+<span class="nc" id="L113">        return directory;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

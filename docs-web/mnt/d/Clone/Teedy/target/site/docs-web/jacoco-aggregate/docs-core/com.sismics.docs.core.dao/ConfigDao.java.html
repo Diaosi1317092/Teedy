@@ -12,7 +12,7 @@ import jakarta.persistence.NoResultException;
  * 
  * @author jtremeaux
  */
-<span class="fc" id="L15">public class ConfigDao {</span>
+<span class="nc" id="L15">public class ConfigDao {</span>
     /**
      * Gets a configuration parameter by its ID.
      * 
@@ -20,15 +20,15 @@ import jakarta.persistence.NoResultException;
      * @return Configuration parameter
      */
     public Config getById(ConfigType id) {
-<span class="fc" id="L23">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
+<span class="nc" id="L23">        EntityManager em = ThreadLocalContext.get().getEntityManager();</span>
         
         // Prevents from getting parameters outside of a transactional context (e.g. jUnit)
-<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (em == null) {</span>
-<span class="fc" id="L27">            return null;</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (em == null) {</span>
+<span class="nc" id="L27">            return null;</span>
         }
         
         try {
-<span class="fc" id="L31">            return em.find(Config.class, id);</span>
+<span class="nc" id="L31">            return em.find(Config.class, id);</span>
 <span class="nc" id="L32">        } catch (NoResultException e) {</span>
 <span class="nc" id="L33">            return null;</span>
         }
@@ -48,7 +48,7 @@ import jakarta.persistence.NoResultException;
 <span class="nc" id="L48">            config.setId(id);</span>
 <span class="nc" id="L49">            config.setValue(value);</span>
 <span class="nc" id="L50">            em.persist(config);</span>
-<span class="nc" id="L51">        } else {</span>
+        } else {
 <span class="nc" id="L52">            config.setValue(value);</span>
         }
 <span class="nc" id="L54">    }</span>

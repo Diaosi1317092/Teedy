@@ -16,7 +16,7 @@ public class ThreadLocalContext {
     /**
      * ThreadLocal to store the context.
      */
-<span class="fc" id="L19">    private static final ThreadLocal&lt;ThreadLocalContext&gt; threadLocalContext = new ThreadLocal&lt;&gt;();</span>
+<span class="nc" id="L19">    private static final ThreadLocal&lt;ThreadLocalContext&gt; threadLocalContext = new ThreadLocal&lt;&gt;();</span>
     
     /**
      * Entity manager.
@@ -26,14 +26,14 @@ public class ThreadLocalContext {
     /**
      * List of async events posted during this request.
      */
-<span class="fc" id="L29">    private List&lt;Object&gt; asyncEventList = Lists.newArrayList();</span>
+<span class="nc" id="L29">    private List&lt;Object&gt; asyncEventList = Lists.newArrayList();</span>
 
     /**
      * Private constructor.
      */
-<span class="fc" id="L34">    private ThreadLocalContext() {</span>
+<span class="nc" id="L34">    private ThreadLocalContext() {</span>
         // NOP
-<span class="fc" id="L36">    }</span>
+<span class="nc" id="L36">    }</span>
     
     /**
      * Returns an instance of this thread context.
@@ -41,20 +41,20 @@ public class ThreadLocalContext {
      * @return Thread local context
      */
     public static ThreadLocalContext get() {
-<span class="fc" id="L44">        ThreadLocalContext context = threadLocalContext.get();</span>
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (context == null) {</span>
-<span class="fc" id="L46">            context = new ThreadLocalContext();</span>
-<span class="fc" id="L47">            threadLocalContext.set(context);</span>
+<span class="nc" id="L44">        ThreadLocalContext context = threadLocalContext.get();</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (context == null) {</span>
+<span class="nc" id="L46">            context = new ThreadLocalContext();</span>
+<span class="nc" id="L47">            threadLocalContext.set(context);</span>
         }
-<span class="fc" id="L49">        return context;</span>
+<span class="nc" id="L49">        return context;</span>
     }
 
     /**
      * Cleans up the instance of this thread context.
      */
     public static void cleanup() {
-<span class="fc" id="L56">        threadLocalContext.set(null);</span>
-<span class="fc" id="L57">    }</span>
+<span class="nc" id="L56">        threadLocalContext.set(null);</span>
+<span class="nc" id="L57">    }</span>
     
     /**
      * Getter of entityManager.
@@ -62,12 +62,12 @@ public class ThreadLocalContext {
      * @return entityManager
      */
     public EntityManager getEntityManager() {
-<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (entityManager != null &amp;&amp; entityManager.isOpen()) {</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">        if (entityManager != null &amp;&amp; entityManager.isOpen()) {</span>
             // This disables the L1 cache
-<span class="fc" id="L67">            entityManager.flush();</span>
-<span class="fc" id="L68">            entityManager.clear();</span>
+<span class="nc" id="L67">            entityManager.flush();</span>
+<span class="nc" id="L68">            entityManager.clear();</span>
         }
-<span class="fc" id="L70">        return entityManager;</span>
+<span class="nc" id="L70">        return entityManager;</span>
     }
 
     /**
@@ -76,8 +76,8 @@ public class ThreadLocalContext {
      * @param entityManager entityManager
      */
     public void setEntityManager(EntityManager entityManager) {
-<span class="fc" id="L79">        this.entityManager = entityManager;</span>
-<span class="fc" id="L80">    }</span>
+<span class="nc" id="L79">        this.entityManager = entityManager;</span>
+<span class="nc" id="L80">    }</span>
 
     /**
      * Add an async event to the queue to be fired after the current request.
@@ -92,12 +92,12 @@ public class ThreadLocalContext {
      * Fire all pending async events.
      */
     public void fireAllAsyncEvents() {
-<span class="fc" id="L95">        Iterator&lt;Object&gt; iterator = asyncEventList.iterator();</span>
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        while (iterator.hasNext()) {</span>
+<span class="nc" id="L95">        Iterator&lt;Object&gt; iterator = asyncEventList.iterator();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        while (iterator.hasNext()) {</span>
 <span class="nc" id="L97">            Object asyncEvent = iterator.next();</span>
 <span class="nc" id="L98">            iterator.remove();</span>
 <span class="nc" id="L99">            AppContext.getInstance().getAsyncEventBus().post(asyncEvent);</span>
-        }
-<span class="fc" id="L101">    }</span>
+<span class="nc" id="L100">        }</span>
+<span class="nc" id="L101">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

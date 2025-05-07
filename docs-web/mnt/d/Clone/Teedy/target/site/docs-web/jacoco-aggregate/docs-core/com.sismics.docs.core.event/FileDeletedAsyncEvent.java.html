@@ -7,7 +7,7 @@ import com.google.common.base.MoreObjects;
  *
  * @author bgamard
  */
-<span class="fc" id="L10">public class FileDeletedAsyncEvent extends UserEvent {</span>
+<span class="nc" id="L10">public class FileDeletedAsyncEvent extends UserEvent {</span>
     /**
      * File ID.
      */
@@ -16,27 +16,27 @@ import com.google.common.base.MoreObjects;
     private Long fileSize;
 
     public String getFileId() {
-<span class="fc" id="L19">        return fileId;</span>
+<span class="nc" id="L19">        return fileId;</span>
     }
 
     public void setFileId(String fileId) {
-<span class="fc" id="L23">        this.fileId = fileId;</span>
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L23">        this.fileId = fileId;</span>
+<span class="nc" id="L24">    }</span>
 
     public Long getFileSize() {
-<span class="fc" id="L27">        return fileSize;</span>
+<span class="nc" id="L27">        return fileSize;</span>
     }
 
     public void setFileSize(Long fileSize) {
-<span class="fc" id="L31">        this.fileSize = fileSize;</span>
-<span class="fc" id="L32">    }</span>
+<span class="nc" id="L31">        this.fileSize = fileSize;</span>
+<span class="nc" id="L32">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L36">        return MoreObjects.toStringHelper(this)</span>
-<span class="fc" id="L37">            .add(&quot;fileId&quot;, fileId)</span>
-<span class="fc" id="L38">            .add(&quot;fileSize&quot;, fileSize)</span>
-<span class="fc" id="L39">            .toString();</span>
+<span class="nc" id="L36">        return MoreObjects.toStringHelper(this)</span>
+<span class="nc" id="L37">            .add(&quot;fileId&quot;, fileId)</span>
+<span class="nc" id="L38">            .add(&quot;fileSize&quot;, fileSize)</span>
+<span class="nc" id="L39">            .toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

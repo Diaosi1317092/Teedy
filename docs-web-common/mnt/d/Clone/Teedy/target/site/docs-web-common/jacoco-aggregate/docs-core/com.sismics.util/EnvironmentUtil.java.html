@@ -7,20 +7,20 @@
  */
 <span class="nc" id="L8">public class EnvironmentUtil {</span>
 
-<span class="fc" id="L10">    private static String OS = System.getProperty(&quot;os.name&quot;).toLowerCase();</span>
+<span class="nc" id="L10">    private static String OS = System.getProperty(&quot;os.name&quot;).toLowerCase();</span>
 
-<span class="fc" id="L12">    private static String APPLICATION_MODE = System.getProperty(&quot;application.mode&quot;);</span>
+<span class="nc" id="L12">    private static String APPLICATION_MODE = System.getProperty(&quot;application.mode&quot;);</span>
 
-<span class="fc" id="L14">    private static String WINDOWS_APPDATA = System.getenv(&quot;APPDATA&quot;);</span>
+<span class="nc" id="L14">    private static String WINDOWS_APPDATA = System.getenv(&quot;APPDATA&quot;);</span>
 
-<span class="fc" id="L16">    private static String MAC_OS_USER_HOME = System.getProperty(&quot;user.home&quot;);</span>
+<span class="nc" id="L16">    private static String MAC_OS_USER_HOME = System.getProperty(&quot;user.home&quot;);</span>
 
-<span class="fc" id="L18">    private static String TEEDY_HOME = System.getProperty(&quot;docs.home&quot;);</span>
+<span class="nc" id="L18">    private static String TEEDY_HOME = System.getProperty(&quot;docs.home&quot;);</span>
 
     /**
      * In a web application context.
      */
-<span class="fc" id="L23">    private static boolean webappContext;</span>
+    private static boolean webappContext;
 
     /**
      * Returns true if running under Microsoft Windows.
@@ -55,7 +55,7 @@
      * @return Unit testing environment
      */
     public static boolean isUnitTest() {
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        return !webappContext;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        return !webappContext;</span>
     }
 
     /**
@@ -91,7 +91,7 @@
      * @return Home directory
      */
     public static String getTeedyHome() {
-<span class="fc" id="L94">        return TEEDY_HOME;</span>
+<span class="nc" id="L94">        return TEEDY_HOME;</span>
     }
 
     /**

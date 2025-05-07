@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author bgamard
  */
-<span class="fc" id="L29">public class PptxFormatHandler implements FormatHandler {</span>
+<span class="nc" id="L29">public class PptxFormatHandler implements FormatHandler {</span>
     /**
      * Cached PPTX loaded file.
      */
@@ -34,7 +34,7 @@ import java.util.List;
 
     @Override
     public boolean accept(String mimeType) {
-<span class="fc" id="L37">        return MimeType.OFFICE_PRESENTATION.equals(mimeType);</span>
+<span class="nc" id="L37">        return MimeType.OFFICE_PRESENTATION.equals(mimeType);</span>
     }
 
     @Override
@@ -49,34 +49,34 @@ import java.util.List;
 
     @Override
     public String extractContent(String language, Path file) throws Exception {
-<span class="fc" id="L52">        XMLSlideShow pptx = loadPPtxFile(file);</span>
-<span class="fc" id="L53">        return new SlideShowExtractor&lt;&gt;(pptx).getText();</span>
+<span class="nc" id="L52">        XMLSlideShow pptx = loadPPtxFile(file);</span>
+<span class="nc" id="L53">        return new SlideShowExtractor&lt;&gt;(pptx).getText();</span>
     }
 
     @Override
     public void appendToPdf(Path file, PDDocument doc, boolean fitImageToPage, int margin, MemoryUsageSetting memUsageSettings, Closer closer) throws Exception {
-<span class="fc" id="L58">        XMLSlideShow pptx = loadPPtxFile(file);</span>
-<span class="fc" id="L59">        List&lt;XSLFSlide&gt; slides = pptx.getSlides();</span>
-<span class="fc" id="L60">        Dimension pgsize = pptx.getPageSize();</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (int slideIndex = 0; slideIndex &lt; slides.size(); slideIndex++) {</span>
+<span class="nc" id="L58">        XMLSlideShow pptx = loadPPtxFile(file);</span>
+<span class="nc" id="L59">        List&lt;XSLFSlide&gt; slides = pptx.getSlides();</span>
+<span class="nc" id="L60">        Dimension pgsize = pptx.getPageSize();</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        for (int slideIndex = 0; slideIndex &lt; slides.size(); slideIndex++) {</span>
             // One PDF page per slide
-<span class="fc" id="L63">            PDPage page = new PDPage(new PDRectangle(pgsize.width, pgsize.height));</span>
-<span class="fc" id="L64">            try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {</span>
-<span class="fc" id="L65">                BufferedImage bim = generateImageFromSlide(pptx, slideIndex);</span>
-<span class="fc" id="L66">                PDImageXObject pdImage = LosslessFactory.createFromImage(doc, bim);</span>
-<span class="fc" id="L67">                contentStream.drawImage(pdImage, 0, page.getMediaBox().getHeight() - pdImage.getHeight());</span>
+<span class="nc" id="L63">            PDPage page = new PDPage(new PDRectangle(pgsize.width, pgsize.height));</span>
+<span class="nc" id="L64">            try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {</span>
+<span class="nc" id="L65">                BufferedImage bim = generateImageFromSlide(pptx, slideIndex);</span>
+<span class="nc" id="L66">                PDImageXObject pdImage = LosslessFactory.createFromImage(doc, bim);</span>
+<span class="nc" id="L67">                contentStream.drawImage(pdImage, 0, page.getMediaBox().getHeight() - pdImage.getHeight());</span>
             }
-<span class="fc" id="L69">            doc.addPage(page);</span>
+<span class="nc" id="L69">            doc.addPage(page);</span>
         }
-<span class="fc" id="L71">    }</span>
+<span class="nc" id="L71">    }</span>
 
     private XMLSlideShow loadPPtxFile(Path file) throws Exception {
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (slideShow == null) {</span>
-<span class="fc" id="L75">            try (InputStream inputStream = Files.newInputStream(file)) {</span>
-<span class="fc" id="L76">                slideShow = new XMLSlideShow(inputStream);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (slideShow == null) {</span>
+<span class="nc" id="L75">            try (InputStream inputStream = Files.newInputStream(file)) {</span>
+<span class="nc" id="L76">                slideShow = new XMLSlideShow(inputStream);</span>
             }
         }
-<span class="fc" id="L79">        return slideShow;</span>
+<span class="nc" id="L79">        return slideShow;</span>
     }
 
     /**
@@ -87,13 +87,13 @@ import java.util.List;
      * @return Image
      */
     private BufferedImage generateImageFromSlide(XMLSlideShow pptx, int slideIndex) {
-<span class="fc" id="L90">        Dimension pgsize = pptx.getPageSize();</span>
-<span class="fc" id="L91">        BufferedImage img = new BufferedImage(pgsize.width, pgsize.height,BufferedImage.TYPE_INT_RGB);</span>
-<span class="fc" id="L92">        Graphics2D graphics = img.createGraphics();</span>
-<span class="fc" id="L93">        graphics.setPaint(Color.white);</span>
-<span class="fc" id="L94">        graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));</span>
-<span class="fc" id="L95">        pptx.getSlides().get(slideIndex).draw(graphics);</span>
-<span class="fc" id="L96">        return img;</span>
+<span class="nc" id="L90">        Dimension pgsize = pptx.getPageSize();</span>
+<span class="nc" id="L91">        BufferedImage img = new BufferedImage(pgsize.width, pgsize.height,BufferedImage.TYPE_INT_RGB);</span>
+<span class="nc" id="L92">        Graphics2D graphics = img.createGraphics();</span>
+<span class="nc" id="L93">        graphics.setPaint(Color.white);</span>
+<span class="nc" id="L94">        graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));</span>
+<span class="nc" id="L95">        pptx.getSlides().get(slideIndex).draw(graphics);</span>
+<span class="nc" id="L96">        return img;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

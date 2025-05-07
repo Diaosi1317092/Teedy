@@ -30,16 +30,16 @@ import java.util.concurrent.TimeUnit;
  *
  * @author jtremeaux
  */
-<span class="fc" id="L33">public class AppContext {</span>
+<span class="nc" id="L33">public class AppContext {</span>
     /**
      * Logger.
      */
-<span class="fc" id="L37">    private static final Logger log = LoggerFactory.getLogger(AppContext.class);</span>
+<span class="nc" id="L37">    private static final Logger log = LoggerFactory.getLogger(AppContext.class);</span>
 
     /**
      * Singleton instance.
      */
-<span class="fc" id="L42">    private static AppContext instance;</span>
+    private static AppContext instance;
 
     /**
      * Generic asynchronous event bus.
@@ -80,45 +80,45 @@ import java.util.concurrent.TimeUnit;
      * Start the application context.
      */
     private void startUp() {
-<span class="fc" id="L83">        resetEventBus();</span>
+<span class="nc" id="L83">        resetEventBus();</span>
 
         // Start indexing handler
         try {
-<span class="fc" id="L87">            List&lt;Class&lt;? extends IndexingHandler&gt;&gt; indexingHandlerList = Lists.newArrayList(</span>
-<span class="fc" id="L88">                    new ClasspathScanner&lt;IndexingHandler&gt;().findClasses(IndexingHandler.class, &quot;com.sismics.docs.core.util.indexing&quot;));</span>
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            for (Class&lt;? extends IndexingHandler&gt; handlerClass : indexingHandlerList) {</span>
-<span class="fc" id="L90">                IndexingHandler handler = handlerClass.getDeclaredConstructor().newInstance();</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                if (handler.accept()) {</span>
-<span class="fc" id="L92">                    indexingHandler = handler;</span>
-<span class="fc" id="L93">                    break;</span>
+<span class="nc" id="L87">            List&lt;Class&lt;? extends IndexingHandler&gt;&gt; indexingHandlerList = Lists.newArrayList(</span>
+<span class="nc" id="L88">                    new ClasspathScanner&lt;IndexingHandler&gt;().findClasses(IndexingHandler.class, &quot;com.sismics.docs.core.util.indexing&quot;));</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            for (Class&lt;? extends IndexingHandler&gt; handlerClass : indexingHandlerList) {</span>
+<span class="nc" id="L90">                IndexingHandler handler = handlerClass.getDeclaredConstructor().newInstance();</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                if (handler.accept()) {</span>
+<span class="nc" id="L92">                    indexingHandler = handler;</span>
+<span class="nc" id="L93">                    break;</span>
                 }
-            }
-<span class="fc" id="L96">            indexingHandler.startUp();</span>
-<span class="pc" id="L97">        } catch (Exception e) {</span>
+<span class="nc" id="L95">            }</span>
+<span class="nc" id="L96">            indexingHandler.startUp();</span>
+<span class="nc" id="L97">        } catch (Exception e) {</span>
 <span class="nc" id="L98">            log.error(&quot;Error starting the indexing handler&quot;, e);</span>
-        }
+<span class="nc" id="L99">        }</span>
 
         // Start file service
-<span class="fc" id="L102">        fileService = new FileService();</span>
-<span class="fc" id="L103">        fileService.startAsync();</span>
-<span class="fc" id="L104">        fileService.awaitRunning();</span>
+<span class="nc" id="L102">        fileService = new FileService();</span>
+<span class="nc" id="L103">        fileService.startAsync();</span>
+<span class="nc" id="L104">        fileService.awaitRunning();</span>
 
         // Start inbox service
-<span class="fc" id="L107">        inboxService = new InboxService();</span>
-<span class="fc" id="L108">        inboxService.startAsync();</span>
-<span class="fc" id="L109">        inboxService.awaitRunning();</span>
+<span class="nc" id="L107">        inboxService = new InboxService();</span>
+<span class="nc" id="L108">        inboxService.startAsync();</span>
+<span class="nc" id="L109">        inboxService.awaitRunning();</span>
 
         // Start file size service
-<span class="fc" id="L112">        fileSizeService = new FileSizeService();</span>
-<span class="fc" id="L113">        fileSizeService.startAsync();</span>
-<span class="fc" id="L114">        fileSizeService.awaitRunning();</span>
+<span class="nc" id="L112">        fileSizeService = new FileSizeService();</span>
+<span class="nc" id="L113">        fileSizeService.startAsync();</span>
+<span class="nc" id="L114">        fileSizeService.awaitRunning();</span>
 
         // Register fonts
-<span class="fc" id="L117">        PdfUtil.registerFonts();</span>
+<span class="nc" id="L117">        PdfUtil.registerFonts();</span>
 
         // Change the admin password if needed
-<span class="fc" id="L120">        String envAdminPassword = System.getenv(Constants.ADMIN_PASSWORD_INIT_ENV);</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminPassword)) {</span>
+<span class="nc" id="L120">        String envAdminPassword = System.getenv(Constants.ADMIN_PASSWORD_INIT_ENV);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminPassword)) {</span>
 <span class="nc" id="L122">            UserDao userDao = new UserDao();</span>
 <span class="nc" id="L123">            User adminUser = userDao.getById(&quot;admin&quot;);</span>
 <span class="nc bnc" id="L124" title="All 2 branches missed.">            if (Constants.DEFAULT_ADMIN_PASSWORD.equals(adminUser.getPassword())) {</span>
@@ -128,8 +128,8 @@ import java.util.concurrent.TimeUnit;
         }
 
         // Change the admin email if needed
-<span class="fc" id="L131">        String envAdminEmail = System.getenv(Constants.ADMIN_EMAIL_INIT_ENV);</span>
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminEmail)) {</span>
+<span class="nc" id="L131">        String envAdminEmail = System.getenv(Constants.ADMIN_EMAIL_INIT_ENV);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (!Strings.isNullOrEmpty(envAdminEmail)) {</span>
 <span class="nc" id="L133">            UserDao userDao = new UserDao();</span>
 <span class="nc" id="L134">            User adminUser = userDao.getById(&quot;admin&quot;);</span>
 <span class="nc bnc" id="L135" title="All 2 branches missed.">            if (Constants.DEFAULT_ADMIN_EMAIL.equals(adminUser.getEmail())) {</span>
@@ -137,29 +137,29 @@ import java.util.concurrent.TimeUnit;
 <span class="nc" id="L137">                userDao.update(adminUser, &quot;admin&quot;);</span>
             }
         }
-<span class="fc" id="L140">    }</span>
+<span class="nc" id="L140">    }</span>
 
     /**
      * (Re)-initializes the event buses.
      */
     private void resetEventBus() {
-<span class="fc" id="L146">        asyncExecutorList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L146">        asyncExecutorList = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L148">        asyncEventBus = newAsyncEventBus();</span>
-<span class="fc" id="L149">        asyncEventBus.register(new FileProcessingAsyncListener());</span>
-<span class="fc" id="L150">        asyncEventBus.register(new FileDeletedAsyncListener());</span>
-<span class="fc" id="L151">        asyncEventBus.register(new DocumentCreatedAsyncListener());</span>
-<span class="fc" id="L152">        asyncEventBus.register(new DocumentUpdatedAsyncListener());</span>
-<span class="fc" id="L153">        asyncEventBus.register(new DocumentDeletedAsyncListener());</span>
-<span class="fc" id="L154">        asyncEventBus.register(new RebuildIndexAsyncListener());</span>
-<span class="fc" id="L155">        asyncEventBus.register(new AclCreatedAsyncListener());</span>
-<span class="fc" id="L156">        asyncEventBus.register(new AclDeletedAsyncListener());</span>
-<span class="fc" id="L157">        asyncEventBus.register(new WebhookAsyncListener());</span>
+<span class="nc" id="L148">        asyncEventBus = newAsyncEventBus();</span>
+<span class="nc" id="L149">        asyncEventBus.register(new FileProcessingAsyncListener());</span>
+<span class="nc" id="L150">        asyncEventBus.register(new FileDeletedAsyncListener());</span>
+<span class="nc" id="L151">        asyncEventBus.register(new DocumentCreatedAsyncListener());</span>
+<span class="nc" id="L152">        asyncEventBus.register(new DocumentUpdatedAsyncListener());</span>
+<span class="nc" id="L153">        asyncEventBus.register(new DocumentDeletedAsyncListener());</span>
+<span class="nc" id="L154">        asyncEventBus.register(new RebuildIndexAsyncListener());</span>
+<span class="nc" id="L155">        asyncEventBus.register(new AclCreatedAsyncListener());</span>
+<span class="nc" id="L156">        asyncEventBus.register(new AclDeletedAsyncListener());</span>
+<span class="nc" id="L157">        asyncEventBus.register(new WebhookAsyncListener());</span>
 
-<span class="fc" id="L159">        mailEventBus = newAsyncEventBus();</span>
-<span class="fc" id="L160">        mailEventBus.register(new PasswordLostAsyncListener());</span>
-<span class="fc" id="L161">        mailEventBus.register(new RouteStepValidateAsyncListener());</span>
-<span class="fc" id="L162">    }</span>
+<span class="nc" id="L159">        mailEventBus = newAsyncEventBus();</span>
+<span class="nc" id="L160">        mailEventBus.register(new PasswordLostAsyncListener());</span>
+<span class="nc" id="L161">        mailEventBus.register(new RouteStepValidateAsyncListener());</span>
+<span class="nc" id="L162">    }</span>
 
     /**
      * Returns a single instance of the application context.
@@ -167,11 +167,11 @@ import java.util.concurrent.TimeUnit;
      * @return Application context
      */
     public static AppContext getInstance() {
-<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (instance == null) {</span>
-<span class="fc" id="L171">            instance = new AppContext();</span>
-<span class="fc" id="L172">            instance.startUp();</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (instance == null) {</span>
+<span class="nc" id="L171">            instance = new AppContext();</span>
+<span class="nc" id="L172">            instance.startUp();</span>
         }
-<span class="fc" id="L174">        return instance;</span>
+<span class="nc" id="L174">        return instance;</span>
     }
 
     /**
@@ -180,13 +180,13 @@ import java.util.concurrent.TimeUnit;
      * @return Async event bus
      */
     private EventBus newAsyncEventBus() {
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">        if (EnvironmentUtil.isUnitTest()) {</span>
-<span class="fc" id="L184">            return new EventBus();</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (EnvironmentUtil.isUnitTest()) {</span>
+<span class="nc" id="L184">            return new EventBus();</span>
         } else {
 <span class="nc" id="L186">            int threadCount = Math.max(Runtime.getRuntime().availableProcessors() / 2, 2);</span>
 <span class="nc" id="L187">            ThreadPoolExecutor executor = new ThreadPoolExecutor(threadCount, threadCount,</span>
-<span class="nc" id="L188">                    1L, TimeUnit.MINUTES,</span>
-<span class="nc" id="L189">                    new LinkedBlockingQueue&lt;&gt;());</span>
+                    1L, TimeUnit.MINUTES,
+                    new LinkedBlockingQueue&lt;&gt;());
 <span class="nc" id="L190">            asyncExecutorList.add(executor);</span>
 <span class="nc" id="L191">            return new AsyncEventBus(executor);</span>
         }
@@ -201,7 +201,7 @@ import java.util.concurrent.TimeUnit;
 <span class="nc" id="L201">        int queueSize = 0;</span>
 <span class="nc bnc" id="L202" title="All 2 branches missed.">        for (ThreadPoolExecutor executor : asyncExecutorList) {</span>
 <span class="nc" id="L203">            queueSize += executor.getTaskCount() - executor.getCompletedTaskCount();</span>
-        }
+<span class="nc" id="L204">        }</span>
 <span class="nc" id="L205">        return queueSize;</span>
     }
 
@@ -214,7 +214,7 @@ import java.util.concurrent.TimeUnit;
     }
 
     public IndexingHandler getIndexingHandler() {
-<span class="fc" id="L217">        return indexingHandler;</span>
+<span class="nc" id="L217">        return indexingHandler;</span>
     }
 
     public InboxService getInboxService() {
@@ -222,7 +222,7 @@ import java.util.concurrent.TimeUnit;
     }
 
     public FileService getFileService() {
-<span class="fc" id="L225">        return fileService;</span>
+<span class="nc" id="L225">        return fileService;</span>
     }
 
     public void shutDown() {
@@ -233,8 +233,8 @@ import java.util.concurrent.TimeUnit;
 <span class="nc" id="L233">                executor.awaitTermination(1, TimeUnit.MINUTES);</span>
 <span class="nc" id="L234">            } catch (InterruptedException e) {</span>
                 // NOP
-            }
-        }
+<span class="nc" id="L236">            }</span>
+<span class="nc" id="L237">        }</span>
 
 <span class="nc bnc" id="L239" title="All 2 branches missed.">        if (indexingHandler != null) {</span>
 <span class="nc" id="L240">            indexingHandler.shutDown();</span>

@@ -47,7 +47,7 @@ import static java.util.Optional.ofNullable;
     /**
      * Name of the header used to store the authentication token.
      */
-<span class="nc" id="L50">    public static final String HEADER_NAME = &quot;Authorization&quot;;</span>
+    public static final String HEADER_NAME = &quot;Authorization&quot;;
     /**
      * True if this authentication method is enabled.
      */
@@ -86,7 +86,7 @@ import static java.util.Optional.ofNullable;
 <span class="nc" id="L86">                } catch (Exception e) {</span>
 <span class="nc" id="L87">                    log.info(&quot;Error:&quot; + e.getMessage());</span>
 <span class="nc" id="L88">                    return null;</span>
-                }
+<span class="nc" id="L89">                }</span>
             }
         }
 <span class="nc" id="L92">        return user;</span>
@@ -150,7 +150,7 @@ import static java.util.Optional.ofNullable;
 <span class="nc" id="L150">            log.error(&quot;Error calling the jwt issuer at: &quot; + jwtIssuerCerts, e);</span>
 <span class="nc" id="L151">        } catch (CertificateException e) {</span>
 <span class="nc" id="L152">            log.error(&quot;Error in getting the certificate: &quot;, e);</span>
-        }
+<span class="nc" id="L153">        }</span>
 <span class="nc" id="L154">        return rsaPublicKey;</span>
     }
 

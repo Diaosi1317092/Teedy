@@ -20,7 +20,7 @@ import java.nio.file.Path;
  *
  * @author bgamard
  */
-<span class="fc" id="L23">public class DocxFormatHandler implements FormatHandler {</span>
+<span class="nc" id="L23">public class DocxFormatHandler implements FormatHandler {</span>
     /**
      * Temporary PDF file.
      */
@@ -28,7 +28,7 @@ import java.nio.file.Path;
 
     @Override
     public boolean accept(String mimeType) {
-<span class="fc" id="L31">        return MimeType.OFFICE_DOCUMENT.equals(mimeType);</span>
+<span class="nc" id="L31">        return MimeType.OFFICE_DOCUMENT.equals(mimeType);</span>
     }
 
     @Override
@@ -40,14 +40,14 @@ import java.nio.file.Path;
     @Override
     public String extractContent(String language, Path file) throws Exception {
         // Use the PDF format handler
-<span class="fc" id="L43">        return new PdfFormatHandler().extractContent(language, getGeneratedPdf(file));</span>
+<span class="nc" id="L43">        return new PdfFormatHandler().extractContent(language, getGeneratedPdf(file));</span>
     }
 
     @Override
     public void appendToPdf(Path file, PDDocument doc, boolean fitImageToPage, int margin, MemoryUsageSetting memUsageSettings, Closer closer) throws Exception {
         // Use the PDF format handler
-<span class="fc" id="L49">        new PdfFormatHandler().appendToPdf(getGeneratedPdf(file), doc, fitImageToPage, margin, memUsageSettings, closer);</span>
-<span class="fc" id="L50">    }</span>
+<span class="nc" id="L49">        new PdfFormatHandler().appendToPdf(getGeneratedPdf(file), doc, fitImageToPage, margin, memUsageSettings, closer);</span>
+<span class="nc" id="L50">    }</span>
 
     /**
      * Generate a PDF from this DOCX.
@@ -57,17 +57,17 @@ import java.nio.file.Path;
      * @throws Exception e
      */
     private Path getGeneratedPdf(Path file) throws Exception {
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (temporaryPdfFile == null) {</span>
-<span class="fc" id="L61">            temporaryPdfFile = AppContext.getInstance().getFileService().createTemporaryFile();</span>
-<span class="fc" id="L62">            try (InputStream inputStream = Files.newInputStream(file);</span>
-<span class="fc" id="L63">                 OutputStream outputStream = Files.newOutputStream(temporaryPdfFile)) {</span>
-<span class="fc" id="L64">                XWPFDocument document = new XWPFDocument(inputStream);</span>
-<span class="fc" id="L65">                PdfOptions options = PdfOptions.create();</span>
-<span class="fc" id="L66">                PdfConverter.getInstance().convert(document, outputStream, options);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (temporaryPdfFile == null) {</span>
+<span class="nc" id="L61">            temporaryPdfFile = AppContext.getInstance().getFileService().createTemporaryFile();</span>
+<span class="nc" id="L62">            try (InputStream inputStream = Files.newInputStream(file);</span>
+<span class="nc" id="L63">                 OutputStream outputStream = Files.newOutputStream(temporaryPdfFile)) {</span>
+<span class="nc" id="L64">                XWPFDocument document = new XWPFDocument(inputStream);</span>
+<span class="nc" id="L65">                PdfOptions options = PdfOptions.create();</span>
+<span class="nc" id="L66">                PdfConverter.getInstance().convert(document, outputStream, options);</span>
             }
         }
 
-<span class="fc" id="L70">        return temporaryPdfFile;</span>
+<span class="nc" id="L70">        return temporaryPdfFile;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

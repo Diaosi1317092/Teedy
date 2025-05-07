@@ -69,14 +69,14 @@ import java.util.UUID;
 <span class="nc bnc" id="L69" title="All 2 branches missed.">            if (cursor.next()) {</span>
 <span class="nc" id="L70">                userEntry = cursor.get();</span>
 <span class="nc" id="L71">                ldapConnection.bind(userEntry.getDn(), password);</span>
-<span class="nc" id="L72">            } else {</span>
+            } else {
                 // User not found
 <span class="nc" id="L74">                return null;</span>
             }
-<span class="nc" id="L76">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L76" title="All 4 branches missed.">        } catch (Exception e) {</span>
 <span class="nc" id="L77">            log.error(&quot;Error authenticating \&quot;&quot; + username + &quot;\&quot; using the LDAP&quot;, e);</span>
 <span class="nc" id="L78">            return null;</span>
-        }
+<span class="nc" id="L79">        }</span>
 
 <span class="nc" id="L81">        UserDao userDao = new UserDao();</span>
 <span class="nc" id="L82">        User user = userDao.getActiveByUsername(username);</span>
@@ -90,7 +90,7 @@ import java.util.UUID;
 <span class="nc" id="L90">            Attribute mailAttribute = userEntry.get(&quot;mail&quot;);</span>
 <span class="nc bnc" id="L91" title="All 4 branches missed.">            if (mailAttribute == null || mailAttribute.get() == null) {</span>
 <span class="nc" id="L92">                user.setEmail(ConfigUtil.getConfigStringValue(ConfigType.LDAP_DEFAULT_EMAIL));</span>
-<span class="nc" id="L93">            } else {</span>
+            } else {
 <span class="nc" id="L94">                Value value = mailAttribute.get();</span>
 <span class="nc" id="L95">                user.setEmail(value.getString());</span>
             }
@@ -100,7 +100,7 @@ import java.util.UUID;
 <span class="nc" id="L100">            } catch (Exception e) {</span>
 <span class="nc" id="L101">                log.error(&quot;Error while creating the internal user&quot;, e);</span>
 <span class="nc" id="L102">                return null;</span>
-            }
+<span class="nc" id="L103">            }</span>
         }
 
 <span class="nc" id="L106">        return user;</span>

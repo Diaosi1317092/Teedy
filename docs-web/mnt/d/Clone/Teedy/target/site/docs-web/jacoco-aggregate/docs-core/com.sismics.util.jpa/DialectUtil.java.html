@@ -13,7 +13,7 @@
      * @return Object not found
      */
     public static boolean isObjectNotFound(String message) {
-<span class="pc bpc" id="L16" title="2 of 4 branches missed.">        return EMF.isDriverH2() &amp;&amp; message.contains(&quot;not found&quot;) ||</span>
+<span class="nc bnc" id="L16" title="All 4 branches missed.">        return EMF.isDriverH2() &amp;&amp; message.contains(&quot;not found&quot;) ||</span>
 <span class="nc bnc" id="L17" title="All 4 branches missed.">                EMF.isDriverPostgresql() &amp;&amp; message.contains(&quot;does not exist&quot;);</span>
     }
 
@@ -25,17 +25,17 @@
      * @return Transformed SQL
      */
     public static String transform(String sql) {
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (sql.startsWith(&quot;!PGSQL!&quot;)) {</span>
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            return EMF.isDriverH2() ? null : sql.substring(7);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (sql.startsWith(&quot;!PGSQL!&quot;)) {</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            return EMF.isDriverH2() ? null : sql.substring(7);</span>
         }
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (sql.startsWith(&quot;!H2!&quot;)) {</span>
-<span class="pc bpc" id="L32" title="1 of 2 branches missed.">            return EMF.isDriverPostgresql() ? null : sql.substring(4);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (sql.startsWith(&quot;!H2!&quot;)) {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            return EMF.isDriverPostgresql() ? null : sql.substring(4);</span>
         }
 
-<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (EMF.isDriverPostgresql()) {</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (EMF.isDriverPostgresql()) {</span>
 <span class="nc" id="L36">            sql = transformToPostgresql(sql);</span>
         }
-<span class="fc" id="L38">        return sql;</span>
+<span class="nc" id="L38">        return sql;</span>
     }
 
     /**

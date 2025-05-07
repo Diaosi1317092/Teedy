@@ -10,11 +10,11 @@ import com.sismics.util.ClasspathScanner;
  * @author bgamard
  */
 @ClasspathScanner.Priority(100) // We can add handlers before this one
-<span class="fc" id="L13">public class InternalAuthenticationHandler implements AuthenticationHandler {</span>
+<span class="nc" id="L13">public class InternalAuthenticationHandler implements AuthenticationHandler {</span>
     @Override
     public User authenticate(String username, String password) {
-<span class="fc" id="L16">        UserDao userDao = new UserDao();</span>
-<span class="fc" id="L17">        return userDao.authenticate(username, password);</span>
+<span class="nc" id="L16">        UserDao userDao = new UserDao();</span>
+<span class="nc" id="L17">        return userDao.authenticate(username, password);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -71,11 +71,11 @@ import java.util.UUID;
  * @author bgamard
  */
 @ClasspathScanner.Priority(100)
-<span class="fc" id="L74">public class LuceneIndexingHandler implements IndexingHandler {</span>
+<span class="nc" id="L74">public class LuceneIndexingHandler implements IndexingHandler {</span>
     /**
      * Logger.
      */
-<span class="fc" id="L78">    private static final Logger log = LoggerFactory.getLogger(LuceneIndexingHandler.class);</span>
+<span class="nc" id="L78">    private static final Logger log = LoggerFactory.getLogger(LuceneIndexingHandler.class);</span>
 
     /**
      * Lucene directory.
@@ -95,14 +95,14 @@ import java.util.UUID;
     @Override
     public boolean accept() {
         // Embedded Lucene can always start
-<span class="fc" id="L98">        return true;</span>
+<span class="nc" id="L98">        return true;</span>
     }
 
     @Override
     public void startUp() throws Exception {
         try {
-<span class="fc" id="L104">            initLucene();</span>
-<span class="pc" id="L105">        } catch (Exception e) {</span>
+<span class="nc" id="L104">            initLucene();</span>
+<span class="nc" id="L105">        } catch (Exception e) {</span>
             // An error occurred initializing Lucene, the index is out of date or broken, delete everything
 <span class="nc" id="L107">            log.info(&quot;Unable to initialize Lucene, cleaning up the index: &quot; + e.getMessage());</span>
 <span class="nc" id="L108">            Path luceneDirectory = DirectoryUtil.getLuceneDirectory();</span>
@@ -115,32 +115,32 @@ import java.util.UUID;
 <span class="nc" id="L115">            initLucene();</span>
 <span class="nc" id="L116">            RebuildIndexAsyncEvent rebuildIndexAsyncEvent = new RebuildIndexAsyncEvent();</span>
 <span class="nc" id="L117">            AppContext.getInstance().getAsyncEventBus().post(rebuildIndexAsyncEvent);</span>
-        }
-<span class="fc" id="L119">    }</span>
+<span class="nc" id="L118">        }</span>
+<span class="nc" id="L119">    }</span>
 
     private void initLucene() throws Exception {
-<span class="fc" id="L122">        ConfigDao configDao = new ConfigDao();</span>
-<span class="fc" id="L123">        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">        String luceneStorage = luceneStorageConfig == null ? null : luceneStorageConfig.getValue();</span>
+<span class="nc" id="L122">        ConfigDao configDao = new ConfigDao();</span>
+<span class="nc" id="L123">        Config luceneStorageConfig = configDao.getById(ConfigType.LUCENE_DIRECTORY_STORAGE);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        String luceneStorage = luceneStorageConfig == null ? null : luceneStorageConfig.getValue();</span>
 
         // RAM directory storage by default
-<span class="pc bpc" id="L127" title="1 of 4 branches missed.">        if (luceneStorage == null || luceneStorage.equals(&quot;RAM&quot;)) {</span>
-<span class="fc" id="L128">            directory = new RAMDirectory();</span>
-<span class="fc" id="L129">            log.info(&quot;Using RAM Lucene storage&quot;);</span>
-<span class="pc bnc" id="L130" title="All 2 branches missed.">        } else if (luceneStorage.equals(&quot;FILE&quot;)) {</span>
+<span class="nc bnc" id="L127" title="All 4 branches missed.">        if (luceneStorage == null || luceneStorage.equals(&quot;RAM&quot;)) {</span>
+<span class="nc" id="L128">            directory = new RAMDirectory();</span>
+<span class="nc" id="L129">            log.info(&quot;Using RAM Lucene storage&quot;);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        } else if (luceneStorage.equals(&quot;FILE&quot;)) {</span>
 <span class="nc" id="L131">            Path luceneDirectory = DirectoryUtil.getLuceneDirectory();</span>
 <span class="nc" id="L132">            log.info(&quot;Using file Lucene storage: {}&quot;, luceneDirectory);</span>
 <span class="nc" id="L133">            directory = new NIOFSDirectory(luceneDirectory, NoLockFactory.INSTANCE);</span>
         }
 
         // Create an index writer
-<span class="fc" id="L137">        IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());</span>
-<span class="fc" id="L138">        config.setCommitOnClose(true);</span>
-<span class="fc" id="L139">        config.setMergeScheduler(new ConcurrentMergeScheduler());</span>
-<span class="fc" id="L140">        indexWriter = new IndexWriter(directory, config);</span>
+<span class="nc" id="L137">        IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());</span>
+<span class="nc" id="L138">        config.setCommitOnClose(true);</span>
+<span class="nc" id="L139">        config.setMergeScheduler(new ConcurrentMergeScheduler());</span>
+<span class="nc" id="L140">        indexWriter = new IndexWriter(directory, config);</span>
 
         // Check index version and rebuild it if necessary
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (DirectoryReader.indexExists(directory)) {</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (DirectoryReader.indexExists(directory)) {</span>
 <span class="nc" id="L144">            log.info(&quot;Checking index health and version&quot;);</span>
 <span class="nc" id="L145">            try (CheckIndex checkIndex = new CheckIndex(directory)) {</span>
 <span class="nc" id="L146">                CheckIndex.Status status = checkIndex.checkIndex();</span>
@@ -149,7 +149,7 @@ import java.util.UUID;
                 }
             }
         }
-<span class="fc" id="L152">    }</span>
+<span class="nc" id="L152">    }</span>
 
     @Override
     public void shutDown() {
@@ -158,21 +158,21 @@ import java.util.UUID;
 <span class="nc" id="L158">                directoryReader.close();</span>
 <span class="nc" id="L159">            } catch (IOException e) {</span>
 <span class="nc" id="L160">                log.error(&quot;Error closing the index reader&quot;, e);</span>
-            }
+<span class="nc" id="L161">            }</span>
         }
 <span class="nc bnc" id="L163" title="All 2 branches missed.">        if (indexWriter != null) {</span>
             try {
 <span class="nc" id="L165">                indexWriter.close();</span>
 <span class="nc" id="L166">            } catch (IOException e) {</span>
 <span class="nc" id="L167">                log.error(&quot;Error closing the index writer, index may be corrupt&quot;, e);</span>
-            }
+<span class="nc" id="L168">            }</span>
         }
 <span class="nc bnc" id="L170" title="All 2 branches missed.">        if (directory != null) {</span>
             try {
 <span class="nc" id="L172">                directory.close();</span>
 <span class="nc" id="L173">            } catch (IOException e) {</span>
 <span class="nc" id="L174">                log.error(&quot;Error closing Lucene index&quot;, e);</span>
-            }
+<span class="nc" id="L175">            }</span>
         }
 <span class="nc" id="L177">    }</span>
 
@@ -187,7 +187,7 @@ import java.util.UUID;
 <span class="nc bnc" id="L187" title="All 2 branches missed.">            for (Document document : documentList) {</span>
 <span class="nc" id="L188">                org.apache.lucene.document.Document luceneDocument = getDocumentFromDocument(document);</span>
 <span class="nc" id="L189">                indexWriter.addDocument(luceneDocument);</span>
-            }
+<span class="nc" id="L190">            }</span>
 <span class="nc" id="L191">        });</span>
 <span class="nc" id="L192">    }</span>
 
@@ -197,7 +197,7 @@ import java.util.UUID;
 <span class="nc bnc" id="L197" title="All 2 branches missed.">            for (File file : fileList) {</span>
 <span class="nc" id="L198">                org.apache.lucene.document.Document luceneDocument = getDocumentFromFile(file);</span>
 <span class="nc" id="L199">                indexWriter.addDocument(luceneDocument);</span>
-            }
+<span class="nc" id="L200">            }</span>
 <span class="nc" id="L201">        });</span>
 <span class="nc" id="L202">    }</span>
 
@@ -235,8 +235,8 @@ import java.util.UUID;
 
     @Override
     public void deleteDocument(final String id) {
-<span class="fc" id="L238">        handle(indexWriter -&gt; indexWriter.deleteDocuments(new Term(&quot;id&quot;, id)));</span>
-<span class="fc" id="L239">    }</span>
+<span class="nc" id="L238">        handle(indexWriter -&gt; indexWriter.deleteDocuments(new Term(&quot;id&quot;, id)));</span>
+<span class="nc" id="L239">    }</span>
 
     @Override
     public void createAcl(String sourceId, PermType perm, String targetId) {
@@ -316,9 +316,9 @@ import java.util.UUID;
 <span class="nc" id="L316">                    parameterMap.put(&quot;tagId&quot; + index, tagId);</span>
 <span class="nc" id="L317">                    tagCriteriaList.add(String.format(&quot;dt%d.DOT_ID_C is not null&quot;, index));</span>
 <span class="nc" id="L318">                    index++;</span>
-                }
+<span class="nc" id="L319">                }</span>
 <span class="nc" id="L320">                criteriaList.add(&quot;(&quot; + Joiner.on(&quot; OR &quot;).join(tagCriteriaList) + &quot;)&quot;);</span>
-            }
+<span class="nc" id="L321">            }</span>
         }
 <span class="nc bnc" id="L323" title="All 2 branches missed.">        if (!criteria.getExcludedTagIdList().isEmpty()) {</span>
 <span class="nc" id="L324">            int index = 0;</span>
@@ -329,9 +329,9 @@ import java.util.UUID;
 <span class="nc" id="L329">                    parameterMap.put(&quot;tagIdEx&quot; + index, tagId);</span>
 <span class="nc" id="L330">                    tagCriteriaList.add(String.format(&quot;dtex%d.DOT_ID_C is null&quot;, index));</span>
 <span class="nc" id="L331">                    index++;</span>
-                }
+<span class="nc" id="L332">                }</span>
 <span class="nc" id="L333">                criteriaList.add(&quot;(&quot; + Joiner.on(&quot; AND &quot;).join(tagCriteriaList) + &quot;)&quot;);</span>
-            }
+<span class="nc" id="L334">            }</span>
         }
 <span class="nc bnc" id="L336" title="All 4 branches missed.">        if (criteria.getShared() != null &amp;&amp; criteria.getShared()) {</span>
 <span class="nc" id="L337">            criteriaList.add(&quot;s.count &gt; 0&quot;);</span>
@@ -380,7 +380,7 @@ import java.util.UUID;
 <span class="nc" id="L380">            documentDto.setUpdateTimestamp(((Timestamp) o[i]).getTime());</span>
 <span class="nc" id="L381">            documentDto.setHighlight(documentSearchMap.get(documentDto.getId()));</span>
 <span class="nc" id="L382">            documentDtoList.add(documentDto);</span>
-        }
+<span class="nc" id="L383">        }</span>
 
 <span class="nc" id="L385">        paginatedList.setResultList(documentDtoList);</span>
 <span class="nc" id="L386">    }</span>
@@ -406,7 +406,7 @@ import java.util.UUID;
 <span class="nc" id="L406">        List&lt;Lookup.LookupResult&gt; lookupResultList = suggester.lookup(suggestQuery, false, 10);</span>
 <span class="nc bnc" id="L407" title="All 2 branches missed.">        for (Lookup.LookupResult lookupResult : lookupResultList) {</span>
 <span class="nc" id="L408">            suggestionList.add(lookupResult.key.toString());</span>
-        }
+<span class="nc" id="L409">        }</span>
 <span class="nc" id="L410">    }</span>
 
     /**
@@ -573,8 +573,8 @@ import java.util.UUID;
 <span class="nc" id="L573">                directoryReader = DirectoryReader.open(directory);</span>
 <span class="nc" id="L574">            } catch (IOException e) {</span>
 <span class="nc" id="L575">                log.error(&quot;Error creating the directory reader&quot;, e);</span>
-            }
-<span class="nc" id="L577">        } else {</span>
+<span class="nc" id="L576">            }</span>
+        } else {
             try {
 <span class="nc" id="L579">                DirectoryReader newReader = DirectoryReader.openIfChanged(directoryReader);</span>
 <span class="nc bnc" id="L580" title="All 2 branches missed.">                if (newReader != null) {</span>
@@ -583,7 +583,7 @@ import java.util.UUID;
                 }
 <span class="nc" id="L584">            } catch (IOException e) {</span>
 <span class="nc" id="L585">                log.error(&quot;Error while reopening the directory reader&quot;, e);</span>
-            }
+<span class="nc" id="L586">            }</span>
         }
 <span class="nc" id="L588">        return directoryReader;</span>
     }
@@ -595,17 +595,17 @@ import java.util.UUID;
      */
     private void handle(LuceneRunnable runnable) {
         try {
-<span class="fc" id="L598">            runnable.run(indexWriter);</span>
-<span class="pc" id="L599">        } catch (Exception e) {</span>
+<span class="nc" id="L598">            runnable.run(indexWriter);</span>
+<span class="nc" id="L599">        } catch (Exception e) {</span>
 <span class="nc" id="L600">            log.error(&quot;Error in running index writing&quot;, e);</span>
-        }
+<span class="nc" id="L601">        }</span>
 
         try {
-<span class="fc" id="L604">            indexWriter.commit();</span>
-<span class="pc" id="L605">        } catch (IOException e) {</span>
+<span class="nc" id="L604">            indexWriter.commit();</span>
+<span class="nc" id="L605">        } catch (IOException e) {</span>
 <span class="nc" id="L606">            log.error(&quot;Cannot commit index writer&quot;, e);</span>
-        }
-<span class="fc" id="L608">    }</span>
+<span class="nc" id="L607">        }</span>
+<span class="nc" id="L608">    }</span>
 
     /**
      * Lucene runnable.

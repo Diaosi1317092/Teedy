@@ -44,12 +44,12 @@ import java.util.*;
     /**
      * Logger.
      */
-<span class="fc" id="L47">    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);</span>
+<span class="nc" id="L47">    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);</span>
 
     /**
      * File ID of files currently being processed.
      */
-<span class="fc" id="L52">    private static final Set&lt;String&gt; processingFileSet = Collections.synchronizedSet(new HashSet&lt;&gt;());</span>
+<span class="nc" id="L52">    private static final Set&lt;String&gt; processingFileSet = Collections.synchronizedSet(new HashSet&lt;&gt;());</span>
     
     /**
      * Optical character recognition on an image.
@@ -61,25 +61,25 @@ import java.util.*;
      */
     public static String ocrFile(String language, BufferedImage image) throws Exception {
         // Upscale, grayscale and deskew the image
-<span class="fc" id="L64">        BufferedImage resizedImage = Scalr.resize(image, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC, 3500, Scalr.OP_ANTIALIAS, Scalr.OP_GRAYSCALE);</span>
-<span class="fc" id="L65">        image.flush();</span>
-<span class="fc" id="L66">        ImageDeskew imageDeskew = new ImageDeskew(resizedImage);</span>
-<span class="fc" id="L67">        BufferedImage deskewedImage = Scalr.rotate(resizedImage, - imageDeskew.getSkewAngle(), Scalr.OP_ANTIALIAS, Scalr.OP_GRAYSCALE);</span>
-<span class="fc" id="L68">        resizedImage.flush();</span>
-<span class="fc" id="L69">        Path tmpFile = AppContext.getInstance().getFileService().createTemporaryFile();</span>
-<span class="fc" id="L70">        ImageIO.write(deskewedImage, &quot;tiff&quot;, tmpFile.toFile());</span>
+<span class="nc" id="L64">        BufferedImage resizedImage = Scalr.resize(image, Scalr.Method.AUTOMATIC, Scalr.Mode.AUTOMATIC, 3500, Scalr.OP_ANTIALIAS, Scalr.OP_GRAYSCALE);</span>
+<span class="nc" id="L65">        image.flush();</span>
+<span class="nc" id="L66">        ImageDeskew imageDeskew = new ImageDeskew(resizedImage);</span>
+<span class="nc" id="L67">        BufferedImage deskewedImage = Scalr.rotate(resizedImage, - imageDeskew.getSkewAngle(), Scalr.OP_ANTIALIAS, Scalr.OP_GRAYSCALE);</span>
+<span class="nc" id="L68">        resizedImage.flush();</span>
+<span class="nc" id="L69">        Path tmpFile = AppContext.getInstance().getFileService().createTemporaryFile();</span>
+<span class="nc" id="L70">        ImageIO.write(deskewedImage, &quot;tiff&quot;, tmpFile.toFile());</span>
 
-<span class="fc" id="L72">        List&lt;String&gt; result = Lists.newLinkedList(Arrays.asList(&quot;tesseract&quot;, tmpFile.toAbsolutePath().toString(), &quot;stdout&quot;, &quot;-l&quot;, language));</span>
-<span class="fc" id="L73">        ProcessBuilder pb = new ProcessBuilder(result);</span>
-<span class="fc" id="L74">        Process process = pb.start();</span>
+<span class="nc" id="L72">        List&lt;String&gt; result = Lists.newLinkedList(Arrays.asList(&quot;tesseract&quot;, tmpFile.toAbsolutePath().toString(), &quot;stdout&quot;, &quot;-l&quot;, language));</span>
+<span class="nc" id="L73">        ProcessBuilder pb = new ProcessBuilder(result);</span>
+<span class="nc" id="L74">        Process process = pb.start();</span>
 
         // Consume the process error stream
-<span class="fc" id="L77">        final String commandName = pb.command().get(0);</span>
-<span class="fc" id="L78">        new InputStreamReaderThread(process.getErrorStream(), commandName).start();</span>
+<span class="nc" id="L77">        final String commandName = pb.command().get(0);</span>
+<span class="nc" id="L78">        new InputStreamReaderThread(process.getErrorStream(), commandName).start();</span>
 
         // Consume the data as text
-<span class="fc" id="L81">        try (InputStream is = process.getInputStream()) {</span>
-<span class="fc" id="L82">            return CharStreams.toString(new InputStreamReader(is, StandardCharsets.UTF_8));</span>
+<span class="nc" id="L81">        try (InputStream is = process.getInputStream()) {</span>
+<span class="nc" id="L82">            return CharStreams.toString(new InputStreamReader(is, StandardCharsets.UTF_8));</span>
         }
     }
 
@@ -89,20 +89,20 @@ import java.util.*;
      * @param fileId ID of file to delete
      */
     public static void delete(String fileId) throws IOException {
-<span class="fc" id="L92">        Path storedFile = DirectoryUtil.getStorageDirectory().resolve(fileId);</span>
-<span class="fc" id="L93">        Path webFile = DirectoryUtil.getStorageDirectory().resolve(fileId + &quot;_web&quot;);</span>
-<span class="fc" id="L94">        Path thumbnailFile = DirectoryUtil.getStorageDirectory().resolve(fileId + &quot;_thumb&quot;);</span>
+<span class="nc" id="L92">        Path storedFile = DirectoryUtil.getStorageDirectory().resolve(fileId);</span>
+<span class="nc" id="L93">        Path webFile = DirectoryUtil.getStorageDirectory().resolve(fileId + &quot;_web&quot;);</span>
+<span class="nc" id="L94">        Path thumbnailFile = DirectoryUtil.getStorageDirectory().resolve(fileId + &quot;_thumb&quot;);</span>
         
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (Files.exists(storedFile)) {</span>
-<span class="fc" id="L97">            Files.delete(storedFile);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (Files.exists(storedFile)) {</span>
+<span class="nc" id="L97">            Files.delete(storedFile);</span>
         }
-<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (Files.exists(webFile)) {</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (Files.exists(webFile)) {</span>
 <span class="nc" id="L100">            Files.delete(webFile);</span>
         }
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (Files.exists(thumbnailFile)) {</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (Files.exists(thumbnailFile)) {</span>
 <span class="nc" id="L103">            Files.delete(thumbnailFile);</span>
         }
-<span class="fc" id="L105">    }</span>
+<span class="nc" id="L105">    }</span>
 
     /**
      * Create a new file.
@@ -124,7 +124,7 @@ import java.util.*;
 <span class="nc" id="L124">            mimeType = MimeTypeUtil.guessMimeType(unencryptedFile, name);</span>
 <span class="nc" id="L125">        } catch (IOException e) {</span>
 <span class="nc" id="L126">            throw new IOException(&quot;ErrorGuessMime&quot;, e);</span>
-        }
+<span class="nc" id="L127">        }</span>
 
         // Validate user quota
 <span class="nc" id="L130">        UserDao userDao = new UserDao();</span>
@@ -160,7 +160,7 @@ import java.util.*;
 <span class="nc bnc" id="L160" title="All 2 branches missed.">            if (previousFileId == null) {</span>
                 // It's not a new version, so put it in last order
 <span class="nc" id="L162">                file.setOrder(fileDao.getByDocumentId(userId, documentId).size());</span>
-<span class="nc" id="L163">            } else {</span>
+            } else {
                 // It's a new version, update the previous version
 <span class="nc" id="L165">                File previousFile = fileDao.getActiveById(previousFileId);</span>
 <span class="nc bnc" id="L166" title="All 4 branches missed.">                if (previousFile == null || !previousFile.getDocumentId().equals(documentId)) {</span>
@@ -255,17 +255,17 @@ import java.util.*;
     public static long getFileSize(String fileId, User user) {
         // To get the size we copy the decrypted content into a null output stream
         // and count the copied byte size.
-<span class="fc" id="L258">        Path storedFile = DirectoryUtil.getStorageDirectory().resolve(fileId);</span>
-<span class="fc bfc" id="L259" title="All 2 branches covered.">        if (! Files.exists(storedFile)) {</span>
-<span class="fc" id="L260">            log.debug(&quot;File does not exist &quot; + fileId);</span>
-<span class="fc" id="L261">            return File.UNKNOWN_SIZE;</span>
+<span class="nc" id="L258">        Path storedFile = DirectoryUtil.getStorageDirectory().resolve(fileId);</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        if (! Files.exists(storedFile)) {</span>
+<span class="nc" id="L260">            log.debug(&quot;File does not exist &quot; + fileId);</span>
+<span class="nc" id="L261">            return File.UNKNOWN_SIZE;</span>
         }
-<span class="fc" id="L263">        try (InputStream fileInputStream = Files.newInputStream(storedFile);</span>
-<span class="fc" id="L264">             InputStream inputStream = EncryptionUtil.decryptInputStream(fileInputStream, user.getPrivateKey());</span>
-<span class="fc" id="L265">             CountingInputStream countingInputStream = new CountingInputStream(inputStream);</span>
+<span class="nc" id="L263">        try (InputStream fileInputStream = Files.newInputStream(storedFile);</span>
+<span class="nc" id="L264">             InputStream inputStream = EncryptionUtil.decryptInputStream(fileInputStream, user.getPrivateKey());</span>
+<span class="nc" id="L265">             CountingInputStream countingInputStream = new CountingInputStream(inputStream);</span>
         ) {
-<span class="fc" id="L267">            IOUtils.copy(countingInputStream, NullOutputStream.NULL_OUTPUT_STREAM);</span>
-<span class="fc" id="L268">            return countingInputStream.getByteCount();</span>
+<span class="nc" id="L267">            IOUtils.copy(countingInputStream, NullOutputStream.NULL_OUTPUT_STREAM);</span>
+<span class="nc" id="L268">            return countingInputStream.getByteCount();</span>
 <span class="nc" id="L269">        } catch (Exception e) {</span>
 <span class="nc" id="L270">            log.debug(&quot;Can't find size of file &quot; + fileId, e);</span>
 <span class="nc" id="L271">            return File.UNKNOWN_SIZE;</span>
