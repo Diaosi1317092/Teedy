@@ -32,12 +32,12 @@ package com.sismics.util.totp;
 
 import java.util.concurrent.TimeUnit;
 
-<span class="fc" id="L35">public class GoogleAuthenticatorConfig {</span>
-<span class="fc" id="L36">    private long timeStepSizeInMillis = TimeUnit.SECONDS.toMillis(30);</span>
-<span class="fc" id="L37">    private int windowSize = 3;</span>
-<span class="fc" id="L38">    private int codeDigits = 6;</span>
-<span class="fc" id="L39">    private int keyModulus = (int) Math.pow(10, codeDigits);</span>
-<span class="fc" id="L40">    private KeyRepresentation keyRepresentation = KeyRepresentation.BASE32;</span>
+<span class="nc" id="L35">public class GoogleAuthenticatorConfig {</span>
+<span class="nc" id="L36">    private long timeStepSizeInMillis = TimeUnit.SECONDS.toMillis(30);</span>
+<span class="nc" id="L37">    private int windowSize = 3;</span>
+<span class="nc" id="L38">    private int codeDigits = 6;</span>
+<span class="nc" id="L39">    private int keyModulus = (int) Math.pow(10, codeDigits);</span>
+<span class="nc" id="L40">    private KeyRepresentation keyRepresentation = KeyRepresentation.BASE32;</span>
 
     /**
      * Returns the key module.
@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
      * @return the key module.
      */
     public int getKeyModulus() {
-<span class="fc" id="L48">        return keyModulus;</span>
+<span class="nc" id="L48">        return keyModulus;</span>
     }
 
     /**
@@ -54,7 +54,7 @@ import java.util.concurrent.TimeUnit;
      * @return the key representation.
      */
     public KeyRepresentation getKeyRepresentation() {
-<span class="fc" id="L57">        return keyRepresentation;</span>
+<span class="nc" id="L57">        return keyRepresentation;</span>
     }
 
     /**
@@ -73,7 +73,7 @@ import java.util.concurrent.TimeUnit;
      * @return the time step size in milliseconds.
      */
     public long getTimeStepSizeInMillis() {
-<span class="fc" id="L76">        return timeStepSizeInMillis;</span>
+<span class="nc" id="L76">        return timeStepSizeInMillis;</span>
     }
 
     /**
@@ -91,7 +91,7 @@ import java.util.concurrent.TimeUnit;
      * @see #timeStepSizeInMillis
      */
     public int getWindowSize() {
-<span class="fc" id="L94">        return windowSize;</span>
+<span class="nc" id="L94">        return windowSize;</span>
     }
 
 <span class="nc" id="L97">    public static class GoogleAuthenticatorConfigBuilder {</span>

@@ -44,7 +44,7 @@ class ReseedingSecureRandom {
     private static final int MAX_OPERATIONS = 1_000_000;
     private final String provider;
     private final String algorithm;
-<span class="pc" id="L47">    private final AtomicInteger count = new AtomicInteger(0);</span>
+<span class="nc" id="L47">    private final AtomicInteger count = new AtomicInteger(0);</span>
     private SecureRandom secureRandom;
 
 <span class="nc" id="L50">    ReseedingSecureRandom() {</span>
@@ -65,50 +65,50 @@ class ReseedingSecureRandom {
 <span class="nc" id="L65">        buildSecureRandom();</span>
 <span class="nc" id="L66">    }</span>
 
-<span class="fc" id="L68">    ReseedingSecureRandom(String algorithm, String provider) {</span>
-<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (algorithm == null) {</span>
+<span class="nc" id="L68">    ReseedingSecureRandom(String algorithm, String provider) {</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (algorithm == null) {</span>
 <span class="nc" id="L70">            throw new IllegalArgumentException(&quot;Algorithm cannot be null.&quot;);</span>
         }
 
-<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (provider == null) {</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (provider == null) {</span>
 <span class="nc" id="L74">            throw new IllegalArgumentException(&quot;Provider cannot be null.&quot;);</span>
         }
 
-<span class="fc" id="L77">        this.algorithm = algorithm;</span>
-<span class="fc" id="L78">        this.provider = provider;</span>
+<span class="nc" id="L77">        this.algorithm = algorithm;</span>
+<span class="nc" id="L78">        this.provider = provider;</span>
 
-<span class="fc" id="L80">        buildSecureRandom();</span>
-<span class="fc" id="L81">    }</span>
+<span class="nc" id="L80">        buildSecureRandom();</span>
+<span class="nc" id="L81">    }</span>
 
     private void buildSecureRandom() {
         try {
-<span class="pc bpc" id="L85" title="3 of 4 branches missed.">            if (this.algorithm == null &amp;&amp; this.provider == null) {</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">            if (this.algorithm == null &amp;&amp; this.provider == null) {</span>
 <span class="nc" id="L86">                this.secureRandom = new SecureRandom();</span>
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            } else if (this.provider == null) {</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            } else if (this.provider == null) {</span>
 <span class="nc" id="L88">                this.secureRandom = SecureRandom.getInstance(this.algorithm);</span>
-<span class="nc" id="L89">            } else {</span>
-<span class="fc" id="L90">                this.secureRandom = SecureRandom.getInstance(this.algorithm, this.provider);</span>
+            } else {
+<span class="nc" id="L90">                this.secureRandom = SecureRandom.getInstance(this.algorithm, this.provider);</span>
             }
-<span class="pc" id="L92">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L92">        } catch (NoSuchAlgorithmException e) {</span>
 <span class="nc" id="L93">            throw new GoogleAuthenticatorException(String.format(&quot;Could not initialise SecureRandom with the specified algorithm: %s. &quot;</span>
-<span class="nc" id="L94">                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.algorithm, GoogleAuthenticator.RNG_ALGORITHM), e);</span>
+                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.algorithm, GoogleAuthenticator.RNG_ALGORITHM), e);
 <span class="nc" id="L95">        } catch (NoSuchProviderException e) {</span>
 <span class="nc" id="L96">            throw new GoogleAuthenticatorException(String.format(&quot;Could not initialise SecureRandom with the specified provider: %s. &quot;</span>
-<span class="nc" id="L97">                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.provider, GoogleAuthenticator.RNG_ALGORITHM_PROVIDER), e);</span>
-        }
-<span class="fc" id="L99">    }</span>
+                    + &quot;Another provider can be chosen setting the %s system property.&quot;, this.provider, GoogleAuthenticator.RNG_ALGORITHM_PROVIDER), e);
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">    }</span>
 
     void nextBytes(byte[] bytes) {
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (count.incrementAndGet() &gt; MAX_OPERATIONS) {</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (count.incrementAndGet() &gt; MAX_OPERATIONS) {</span>
 <span class="nc" id="L103">            synchronized (this) {</span>
 <span class="nc bnc" id="L104" title="All 2 branches missed.">                if (count.get() &gt; MAX_OPERATIONS) {</span>
 <span class="nc" id="L105">                    buildSecureRandom();</span>
 <span class="nc" id="L106">                    count.set(0);</span>
                 }
-            }
+<span class="nc" id="L108">            }</span>
         }
 
-<span class="fc" id="L111">        this.secureRandom.nextBytes(bytes);</span>
-<span class="fc" id="L112">    }</span>
+<span class="nc" id="L111">        this.secureRandom.nextBytes(bytes);</span>
+<span class="nc" id="L112">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

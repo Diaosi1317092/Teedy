@@ -19,7 +19,7 @@ import com.sismics.docs.core.constant.AuditLogType;
  */
 @Entity
 @Table(name = &quot;T_AUDIT_LOG&quot;)
-<span class="fc" id="L22">public class AuditLog {</span>
+<span class="nc" id="L22">public class AuditLog {</span>
     /**
      * Audit log ID.
      */
@@ -65,60 +65,60 @@ import com.sismics.docs.core.constant.AuditLogType;
     private Date createDate;
     
     public String getId() {
-<span class="fc" id="L68">        return id;</span>
+<span class="nc" id="L68">        return id;</span>
     }
 
     public void setId(String id) {
-<span class="fc" id="L72">        this.id = id;</span>
-<span class="fc" id="L73">    }</span>
+<span class="nc" id="L72">        this.id = id;</span>
+<span class="nc" id="L73">    }</span>
 
     public String getUserId() {
 <span class="nc" id="L76">        return userId;</span>
     }
 
     public void setUserId(String userId) {
-<span class="fc" id="L80">        this.userId = userId;</span>
-<span class="fc" id="L81">    }</span>
+<span class="nc" id="L80">        this.userId = userId;</span>
+<span class="nc" id="L81">    }</span>
 
     public String getEntityId() {
 <span class="nc" id="L84">        return entityId;</span>
     }
 
     public void setEntityId(String entityId) {
-<span class="fc" id="L88">        this.entityId = entityId;</span>
-<span class="fc" id="L89">    }</span>
+<span class="nc" id="L88">        this.entityId = entityId;</span>
+<span class="nc" id="L89">    }</span>
 
     public String getEntityClass() {
 <span class="nc" id="L92">        return entityClass;</span>
     }
 
     public void setEntityClass(String entityClass) {
-<span class="fc" id="L96">        this.entityClass = entityClass;</span>
-<span class="fc" id="L97">    }</span>
+<span class="nc" id="L96">        this.entityClass = entityClass;</span>
+<span class="nc" id="L97">    }</span>
     
     public String getMessage() {
 <span class="nc" id="L100">        return message;</span>
     }
 
     public void setMessage(String message) {
-<span class="fc" id="L104">        this.message = message;</span>
-<span class="fc" id="L105">    }</span>
+<span class="nc" id="L104">        this.message = message;</span>
+<span class="nc" id="L105">    }</span>
 
     public AuditLogType getType() {
 <span class="nc" id="L108">        return type;</span>
     }
 
     public void setType(AuditLogType type) {
-<span class="fc" id="L112">        this.type = type;</span>
-<span class="fc" id="L113">    }</span>
+<span class="nc" id="L112">        this.type = type;</span>
+<span class="nc" id="L113">    }</span>
 
     public Date getCreateDate() {
 <span class="nc" id="L116">        return createDate;</span>
     }
 
     public void setCreateDate(Date createDate) {
-<span class="fc" id="L120">        this.createDate = createDate;</span>
-<span class="fc" id="L121">    }</span>
+<span class="nc" id="L120">        this.createDate = createDate;</span>
+<span class="nc" id="L121">    }</span>
     
     @Override
     public String toString() {

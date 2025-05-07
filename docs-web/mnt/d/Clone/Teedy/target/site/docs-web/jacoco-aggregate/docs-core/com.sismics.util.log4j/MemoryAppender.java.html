@@ -19,7 +19,7 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
  *
  * @author jtremeaux
  */
-<span class="fc" id="L22">public class MemoryAppender extends AppenderSkeleton {</span>
+<span class="nc" id="L22">public class MemoryAppender extends AppenderSkeleton {</span>
 
     /**
      * Maximum size of the queue.
@@ -29,11 +29,11 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
     /**
      * Queue of log entries.
      */
-<span class="fc" id="L32">    private final Queue&lt;LogEntry&gt; logQueue = new ConcurrentLinkedQueue&lt;LogEntry&gt;();</span>
+<span class="nc" id="L32">    private final Queue&lt;LogEntry&gt; logQueue = new ConcurrentLinkedQueue&lt;LogEntry&gt;();</span>
 
     @Override
     public boolean requiresLayout() {
-<span class="fc" id="L36">        return false;</span>
+<span class="nc" id="L36">        return false;</span>
     }
 
     @Override
@@ -46,19 +46,19 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
 
     @Override
     public synchronized void append(LoggingEvent event) {
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        while (logQueue.size() &gt; size) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        while (logQueue.size() &gt; size) {</span>
 <span class="nc" id="L50">            logQueue.remove();</span>
         }
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (closed) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (closed) {</span>
 <span class="nc" id="L53">            LogLog.warn(&quot;This appender is already closed, cannot append event.&quot;);</span>
 <span class="nc" id="L54">            return;</span>
         }
         
-<span class="fc" id="L57">        String loggerName = getLoggerName(event);</span>
+<span class="nc" id="L57">        String loggerName = getLoggerName(event);</span>
 
-<span class="fc" id="L59">        LogEntry logEntry = new LogEntry(System.currentTimeMillis(), event.getLevel(), loggerName, event.getMessage().toString());</span>
-<span class="fc" id="L60">        logQueue.add(logEntry);</span>
-<span class="fc" id="L61">    }</span>
+<span class="nc" id="L59">        LogEntry logEntry = new LogEntry(System.currentTimeMillis(), event.getLevel(), loggerName, event.getMessage().toString());</span>
+<span class="nc" id="L60">        logQueue.add(logEntry);</span>
+<span class="nc" id="L61">    }</span>
 
     /**
      * Extracts the class name of the logger, without the package name.
@@ -67,10 +67,10 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
      * @return Class name
      */
     private String getLoggerName(LoggingEvent event) {
-<span class="fc" id="L70">        int index = event.getLoggerName().lastIndexOf('.');</span>
+<span class="nc" id="L70">        int index = event.getLoggerName().lastIndexOf('.');</span>
 
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        return (index &gt; -1) ?</span>
-<span class="fc" id="L73">            event.getLoggerName().substring(index + 1) :</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        return (index &gt; -1) ?</span>
+<span class="nc" id="L73">            event.getLoggerName().substring(index + 1) :</span>
 <span class="nc" id="L74">            event.getLoggerName();</span>
     }
 
@@ -89,8 +89,8 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
      * @param size size
      */
     public void setSize(int size) {
-<span class="fc" id="L92">        this.size = size;</span>
-<span class="fc" id="L93">    }</span>
+<span class="nc" id="L92">        this.size = size;</span>
+<span class="nc" id="L93">    }</span>
 
     /**
      * Find some logs.
@@ -106,13 +106,13 @@ import com.sismics.docs.core.util.jpa.PaginatedList;
 <span class="nc" id="L106">        int resultCount = 0;</span>
 <span class="nc bnc" id="L107" title="All 2 branches missed.">        for (Iterator&lt;LogEntry&gt; it = logQueue.iterator(); it.hasNext();) {</span>
 <span class="nc" id="L108">            LogEntry logEntry = it.next();</span>
-<span class="nc bnc" id="L109" title="All 4 branches missed.">            if ((minLevel == null ||  Integer.compare(logEntry.getLevel().toInt(), minLevel.toInt()) &gt;= 0) &amp;&amp;</span>
+<span class="nc bnc" id="L109" title="All 6 branches missed.">            if ((minLevel == null ||  Integer.compare(logEntry.getLevel().toInt(), minLevel.toInt()) &gt;= 0) &amp;&amp;</span>
 <span class="nc bnc" id="L110" title="All 4 branches missed.">                    (tag == null || logEntry.getTag().toLowerCase().equals(tag)) &amp;&amp;</span>
-<span class="nc bnc" id="L111" title="All 4 branches missed.">                    (message == null || logEntry.getMessage().toLowerCase().contains(message))) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                    (message == null || logEntry.getMessage().toLowerCase().contains(message))) {</span>
 <span class="nc" id="L112">                logEntryList.add(logEntry);</span>
 <span class="nc" id="L113">                resultCount++;</span>
             }
-        }
+<span class="nc" id="L115">        }</span>
         
 <span class="nc" id="L117">        int fromIndex = logEntryList.size() - list.getOffset() - list.getLimit();</span>
 <span class="nc bnc" id="L118" title="All 2 branches missed.">        if (fromIndex &lt; 0) {</span>

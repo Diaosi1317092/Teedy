@@ -35,22 +35,22 @@ public class InboxService extends AbstractScheduledService {
     /**
      * Logger.
      */
-<span class="fc" id="L38">    private static final Logger log = LoggerFactory.getLogger(InboxService.class);</span>
+<span class="nc" id="L38">    private static final Logger log = LoggerFactory.getLogger(InboxService.class);</span>
 
     /**
      * Last synchronization data.
      */
     private Date lastSyncDate;
-<span class="fc" id="L44">    private int lastSyncMessageCount = 0;</span>
+<span class="nc" id="L44">    private int lastSyncMessageCount = 0;</span>
     private String lastSyncError;
 
-<span class="fc" id="L47">    public InboxService() {</span>
-<span class="fc" id="L48">    }</span>
+<span class="nc" id="L47">    public InboxService() {</span>
+<span class="nc" id="L48">    }</span>
 
     @Override
     protected void startUp() {
-<span class="fc" id="L52">        log.info(&quot;Inbox service starting up&quot;);</span>
-<span class="fc" id="L53">    }</span>
+<span class="nc" id="L52">        log.info(&quot;Inbox service starting up&quot;);</span>
+<span class="nc" id="L53">    }</span>
 
     @Override
     protected void shutDown() {
@@ -60,20 +60,20 @@ public class InboxService extends AbstractScheduledService {
     @Override
     protected void runOneIteration() {
         try {
-<span class="fc" id="L63">            syncInbox();</span>
-<span class="pc" id="L64">        } catch (Throwable e) {</span>
+<span class="nc" id="L63">            syncInbox();</span>
+<span class="nc" id="L64">        } catch (Throwable e) {</span>
 <span class="nc" id="L65">            log.error(&quot;Exception during inbox synching&quot;, e);</span>
-        }
-<span class="fc" id="L67">    }</span>
+<span class="nc" id="L66">        }</span>
+<span class="nc" id="L67">    }</span>
 
     /**
      * Synchronize the inbox.
      */
     public void syncInbox() {
-<span class="fc" id="L73">        TransactionUtil.handle(() -&gt; {</span>
-<span class="fc" id="L74">            Boolean enabled = ConfigUtil.getConfigBooleanValue(ConfigType.INBOX_ENABLED);</span>
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">            if (!enabled) {</span>
-<span class="fc" id="L76">                return;</span>
+<span class="nc" id="L73">        TransactionUtil.handle(() -&gt; {</span>
+<span class="nc" id="L74">            Boolean enabled = ConfigUtil.getConfigBooleanValue(ConfigType.INBOX_ENABLED);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (!enabled) {</span>
+<span class="nc" id="L76">                return;</span>
             }
 
 <span class="nc" id="L79">            log.info(&quot;Synchronizing IMAP inbox...&quot;);</span>
@@ -105,10 +105,10 @@ public class InboxService extends AbstractScheduledService {
                     }
 <span class="nc" id="L106">                } catch (Exception e) {</span>
                     // NOP
-                }
+<span class="nc" id="L108">                }</span>
             }
 <span class="nc" id="L110">        });</span>
-<span class="fc" id="L111">    }</span>
+<span class="nc" id="L111">    }</span>
 
     /**
      * Test the inbox configuration.
@@ -136,13 +136,13 @@ public class InboxService extends AbstractScheduledService {
                 }
 <span class="nc" id="L137">            } catch (Exception e) {</span>
                 // NOP
-            }
+<span class="nc" id="L139">            }</span>
         }
     }
 
     @Override
     protected Scheduler scheduler() {
-<span class="fc" id="L145">        return Scheduler.newFixedDelaySchedule(0, 1, TimeUnit.MINUTES);</span>
+<span class="nc" id="L145">        return Scheduler.newFixedDelaySchedule(0, 1, TimeUnit.MINUTES);</span>
     }
 
     /**
@@ -167,7 +167,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L167">            properties.put(&quot;mail.imaps.connectiontimeout&quot;, 30000);</span>
 <span class="nc" id="L168">            properties.put(&quot;mail.imaps.timeout&quot;, 30000);</span>
 <span class="nc" id="L169">            properties.put(&quot;mail.imaps.writetimeout&quot;, 30000);</span>
-<span class="nc" id="L170">        } else {</span>
+        } else {
 <span class="nc" id="L171">            properties.put(&quot;mail.imap.connectiontimeout&quot;, 30000);</span>
 <span class="nc" id="L172">            properties.put(&quot;mail.imap.timeout&quot;, 30000);</span>
 <span class="nc" id="L173">            properties.put(&quot;mail.imap.writetimeout&quot;, 30000);</span>
@@ -229,7 +229,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L229">        document.setLanguage(ConfigUtil.getConfigStringValue(ConfigType.DEFAULT_LANGUAGE));</span>
 <span class="nc bnc" id="L230" title="All 2 branches missed.">        if (mailContent.getDate() == null) {</span>
 <span class="nc" id="L231">            document.setCreateDate(new Date());</span>
-<span class="nc" id="L232">        } else {</span>
+        } else {
 <span class="nc" id="L233">            document.setCreateDate(mailContent.getDate());</span>
         }
 
@@ -261,7 +261,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc bnc" id="L261" title="All 2 branches missed.">        for (EmailUtil.FileContent fileContent : mailContent.getFileContentList()) {</span>
 <span class="nc" id="L262">            FileUtil.createFile(fileContent.getName(), null, fileContent.getFile(), fileContent.getSize(),</span>
 <span class="nc" id="L263">                    document.getLanguage(), &quot;admin&quot;, document.getId());</span>
-        }
+<span class="nc" id="L264">        }</span>
 
 <span class="nc bnc" id="L266" title="All 2 branches missed.">        if (ConfigUtil.getConfigBooleanValue(ConfigType.INBOX_DELETE_IMPORTED)) {</span>
 <span class="nc" id="L267">            message.setFlag(Flags.Flag.DELETED, true);</span>
@@ -283,7 +283,7 @@ public class InboxService extends AbstractScheduledService {
 <span class="nc" id="L283">        Map&lt;String, String&gt; tagsNameToId = new HashMap&lt;&gt;();</span>
 <span class="nc bnc" id="L284" title="All 2 branches missed.">        for (TagDto tagDto : tags) {</span>
 <span class="nc" id="L285">            tagsNameToId.put(tagDto.getName(), tagDto.getId());</span>
-        }
+<span class="nc" id="L286">        }</span>
 <span class="nc" id="L287">        return tagsNameToId;</span>
     }
 

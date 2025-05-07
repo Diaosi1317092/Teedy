@@ -15,38 +15,38 @@ import java.io.InputStreamReader;
  */
 public class InputStreamReaderThread extends Thread {
 
-<span class="fc" id="L18">    private static final Logger logger = Logger.getLogger(InputStreamReaderThread.class);</span>
+<span class="nc" id="L18">    private static final Logger logger = Logger.getLogger(InputStreamReaderThread.class);</span>
 
     private InputStream is;
 
     private String name;
 
-<span class="fc" id="L24">    private Closer closer = Closer.create();</span>
+<span class="nc" id="L24">    private Closer closer = Closer.create();</span>
 
     public InputStreamReaderThread(InputStream input, String name) {
-<span class="fc" id="L27">        super(name + &quot; InputStreamReader thread&quot;);</span>
-<span class="fc" id="L28">        this.is = closer.register(input);</span>
-<span class="fc" id="L29">        this.name = name;</span>
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L27">        super(name + &quot; InputStreamReader thread&quot;);</span>
+<span class="nc" id="L28">        this.is = closer.register(input);</span>
+<span class="nc" id="L29">        this.name = name;</span>
+<span class="nc" id="L30">    }</span>
 
     @Override
     public void run() {
         try {
-<span class="fc" id="L35">            BufferedReader reader = closer.register(new BufferedReader(new InputStreamReader(is)));</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (String line = reader.readLine(); line != null; line = reader.readLine()) {</span>
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">                if (logger.isDebugEnabled()) {</span>
+<span class="nc" id="L35">            BufferedReader reader = closer.register(new BufferedReader(new InputStreamReader(is)));</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            for (String line = reader.readLine(); line != null; line = reader.readLine()) {</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                if (logger.isDebugEnabled()) {</span>
 <span class="nc" id="L38">                    logger.debug(String.format(name + &quot;: %s&quot;, line));</span>
                 }
             }
-<span class="pc" id="L41">        } catch (IOException x) {</span>
+<span class="nc" id="L41">        } catch (IOException x) {</span>
             // NOP
         } finally {
             try {
-<span class="fc" id="L45">                closer.close();</span>
-<span class="pc" id="L46">            } catch (Exception e) {</span>
+<span class="nc" id="L45">                closer.close();</span>
+<span class="nc" id="L46">            } catch (Exception e) {</span>
                 // NOP
-            }
+<span class="nc" id="L48">            }</span>
         }
-<span class="fc" id="L50">    }</span>
+<span class="nc" id="L50">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

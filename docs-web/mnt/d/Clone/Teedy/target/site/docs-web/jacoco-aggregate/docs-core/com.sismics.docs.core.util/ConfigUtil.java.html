@@ -19,12 +19,12 @@ import java.util.ResourceBundle;
      * @throws IllegalStateException Configuration parameter undefined
      */
     public static String getConfigStringValue(ConfigType configType) {
-<span class="fc" id="L22">        ConfigDao configDao = new ConfigDao();</span>
-<span class="fc" id="L23">        Config config = configDao.getById(configType);</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (config == null) {</span>
-<span class="fc" id="L25">            throw new IllegalStateException(&quot;Config parameter not found: &quot; + configType);</span>
+<span class="nc" id="L22">        ConfigDao configDao = new ConfigDao();</span>
+<span class="nc" id="L23">        Config config = configDao.getById(configType);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (config == null) {</span>
+<span class="nc" id="L25">            throw new IllegalStateException(&quot;Config parameter not found: &quot; + configType);</span>
         }
-<span class="fc" id="L27">        return config.getValue();</span>
+<span class="nc" id="L27">        return config.getValue();</span>
     }
 
     /**
@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
      * @return Resource bundle
      */
     public static ResourceBundle getConfigBundle() {
-<span class="fc" id="L36">        return ResourceBundle.getBundle(&quot;config&quot;);</span>
+<span class="nc" id="L36">        return ResourceBundle.getBundle(&quot;config&quot;);</span>
     }
 
     /**
@@ -70,8 +70,8 @@ import java.util.ResourceBundle;
      * @throws IllegalStateException Configuration parameter undefined
      */
     public static boolean getConfigBooleanValue(ConfigType configType) {
-<span class="fc" id="L73">        String value = getConfigStringValue(configType);</span>
-<span class="fc" id="L74">        return Boolean.parseBoolean(value);</span>
+<span class="nc" id="L73">        String value = getConfigStringValue(configType);</span>
+<span class="nc" id="L74">        return Boolean.parseBoolean(value);</span>
     }
 
     /**
@@ -84,8 +84,8 @@ import java.util.ResourceBundle;
     public static boolean getConfigBooleanValue(ConfigType configType, boolean defaultValue) {
         try {
 <span class="nc" id="L86">            return getConfigBooleanValue(configType);</span>
-<span class="fc" id="L87">        } catch (IllegalStateException e) {</span>
-<span class="fc" id="L88">            return defaultValue;</span>
+<span class="nc" id="L87">        } catch (IllegalStateException e) {</span>
+<span class="nc" id="L88">            return defaultValue;</span>
         }
     }
 }

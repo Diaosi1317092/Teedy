@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = &quot;T_FILE&quot;)
-<span class="fc" id="L17">public class File implements Loggable {</span>
+<span class="nc" id="L17">public class File implements Loggable {</span>
     /**
      * File ID.
      */
@@ -88,7 +88,7 @@ import java.util.Date;
     @Column(name = &quot;FIL_LATESTVERSION_B&quot;, nullable = false)
     private boolean latestVersion;
 
-<span class="fc" id="L91">    public static final Long UNKNOWN_SIZE = -1L;</span>
+<span class="nc" id="L91">    public static final Long UNKNOWN_SIZE = -1L;</span>
 
     /**
      * Can be {@link File#UNKNOWN_SIZE} if the size has not been stored in the database when the file has been uploaded
@@ -104,45 +104,45 @@ import java.util.Date;
     private String privateKey;
     
     public String getId() {
-<span class="fc" id="L107">        return id;</span>
+<span class="nc" id="L107">        return id;</span>
     }
 
     public void setId(String id) {
-<span class="fc" id="L111">        this.id = id;</span>
-<span class="fc" id="L112">    }</span>
+<span class="nc" id="L111">        this.id = id;</span>
+<span class="nc" id="L112">    }</span>
     
     public String getDocumentId() {
-<span class="fc" id="L115">        return documentId;</span>
+<span class="nc" id="L115">        return documentId;</span>
     }
 
     public void setDocumentId(String documentId) {
-<span class="fc" id="L119">        this.documentId = documentId;</span>
-<span class="fc" id="L120">    }</span>
+<span class="nc" id="L119">        this.documentId = documentId;</span>
+<span class="nc" id="L120">    }</span>
 
     public String getName() {
-<span class="fc" id="L123">        return name;</span>
+<span class="nc" id="L123">        return name;</span>
     }
 
     public File setName(String name) {
-<span class="fc" id="L127">        this.name = name;</span>
-<span class="fc" id="L128">        return this;</span>
+<span class="nc" id="L127">        this.name = name;</span>
+<span class="nc" id="L128">        return this;</span>
     }
 
     public String getMimeType() {
-<span class="fc" id="L132">        return mimeType;</span>
+<span class="nc" id="L132">        return mimeType;</span>
     }
 
     public void setMimeType(String mimeType) {
-<span class="fc" id="L136">        this.mimeType = mimeType;</span>
-<span class="fc" id="L137">    }</span>
+<span class="nc" id="L136">        this.mimeType = mimeType;</span>
+<span class="nc" id="L137">    }</span>
 
     public Date getCreateDate() {
 <span class="nc" id="L140">        return createDate;</span>
     }
 
     public void setCreateDate(Date createDate) {
-<span class="fc" id="L144">        this.createDate = createDate;</span>
-<span class="fc" id="L145">    }</span>
+<span class="nc" id="L144">        this.createDate = createDate;</span>
+<span class="nc" id="L145">    }</span>
 
     @Override
     public Date getDeleteDate() {
@@ -154,44 +154,44 @@ import java.util.Date;
 <span class="nc" id="L154">    }</span>
     
     public String getContent() {
-<span class="fc" id="L157">        return content;</span>
+<span class="nc" id="L157">        return content;</span>
     }
 
     public void setContent(String content) {
-<span class="fc" id="L161">        this.content = content;</span>
-<span class="fc" id="L162">    }</span>
+<span class="nc" id="L161">        this.content = content;</span>
+<span class="nc" id="L162">    }</span>
 
     public Integer getOrder() {
-<span class="fc" id="L165">        return order;</span>
+<span class="nc" id="L165">        return order;</span>
     }
 
     public void setOrder(Integer order) {
-<span class="fc" id="L169">        this.order = order;</span>
-<span class="fc" id="L170">    }</span>
+<span class="nc" id="L169">        this.order = order;</span>
+<span class="nc" id="L170">    }</span>
     
     public String getUserId() {
-<span class="fc" id="L173">        return userId;</span>
+<span class="nc" id="L173">        return userId;</span>
     }
 
     public void setUserId(String userId) {
-<span class="fc" id="L177">        this.userId = userId;</span>
-<span class="fc" id="L178">    }</span>
+<span class="nc" id="L177">        this.userId = userId;</span>
+<span class="nc" id="L178">    }</span>
 
     public String getPrivateKey() {
-<span class="fc" id="L181">        return privateKey;</span>
+<span class="nc" id="L181">        return privateKey;</span>
     }
 
     public void setPrivateKey(String privateKey) {
-<span class="fc" id="L185">        this.privateKey = privateKey;</span>
-<span class="fc" id="L186">    }</span>
+<span class="nc" id="L185">        this.privateKey = privateKey;</span>
+<span class="nc" id="L186">    }</span>
 
     public String getVersionId() {
-<span class="fc" id="L189">        return versionId;</span>
+<span class="nc" id="L189">        return versionId;</span>
     }
 
     public File setVersionId(String versionId) {
-<span class="fc" id="L193">        this.versionId = versionId;</span>
-<span class="fc" id="L194">        return this;</span>
+<span class="nc" id="L193">        this.versionId = versionId;</span>
+<span class="nc" id="L194">        return this;</span>
     }
 
     public Integer getVersion() {
@@ -199,29 +199,29 @@ import java.util.Date;
     }
 
     public File setVersion(Integer version) {
-<span class="fc" id="L202">        this.version = version;</span>
-<span class="fc" id="L203">        return this;</span>
+<span class="nc" id="L202">        this.version = version;</span>
+<span class="nc" id="L203">        return this;</span>
     }
 
     public boolean isLatestVersion() {
-<span class="fc" id="L207">        return latestVersion;</span>
+<span class="nc" id="L207">        return latestVersion;</span>
     }
 
     public File setLatestVersion(boolean latestVersion) {
-<span class="fc" id="L211">        this.latestVersion = latestVersion;</span>
-<span class="fc" id="L212">        return this;</span>
+<span class="nc" id="L211">        this.latestVersion = latestVersion;</span>
+<span class="nc" id="L212">        return this;</span>
     }
 
     /**
      * Can return {@link File#UNKNOWN_SIZE} if the file size is not stored in the database.
      */
     public Long getSize() {
-<span class="fc" id="L219">        return size;</span>
+<span class="nc" id="L219">        return size;</span>
     }
 
     public File setSize(Long size) {
-<span class="fc" id="L223">        this.size = size;</span>
-<span class="fc" id="L224">        return this;</span>
+<span class="nc" id="L223">        this.size = size;</span>
+<span class="nc" id="L224">        return this;</span>
     }
 
     @Override
@@ -235,7 +235,7 @@ import java.util.Date;
     @Override
     public String toMessage() {
         // Attached document ID and name concatenated
-<span class="pc bpc" id="L238" title="1 of 2 branches missed.">        return (documentId == null ? Strings.repeat(&quot; &quot;, 36) : documentId) + name;</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        return (documentId == null ? Strings.repeat(&quot; &quot;, 36) : documentId) + name;</span>
     }
 
     /**
